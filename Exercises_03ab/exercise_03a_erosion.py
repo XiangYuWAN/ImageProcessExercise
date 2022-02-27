@@ -1,27 +1,31 @@
 import cv2
 import numpy as np
-img1 = cv2.imread("immed_gray_inv.pgm", cv2.IMREAD_GRAYSCALE)
-ret,img = cv2.threshold(img1, 100, 1, cv2.THRESH_BINARY)
 
-i =2
+img1 = cv2.imread("immed_gray_inv.pgm", cv2.IMREAD_GRAYSCALE)
+# ret,img = cv2.threshold(img1, 100, 1, cv2.THRESH_BINARY)
+
+i = 2
 kernel = np.ones(shape=(2*i+1, 2*i+1))
-def erode_bin_image(bin_image, kernel):
+def erode_image(image, kernel, ki):
     kernel_size = kernel.shape[0]
-    bin_image = np.array(bin_image)
+    image = np.array(image)
     if (kernel_size%2 == 0) or kernel_size<1:
         raise ValueError("kernel size must be odd and bigger than 1")
-    if (bin_image.max() != 1) or (bin_image.min() != 0):
-        raise ValueError("input image's pixel value must be 0 or 1")
-    d_image = np.zeros(shape=bin_image.shape)
-    center_move = int((kernel_size-1)/2)
-    for i in range(center_move, bin_image.shape[0]-kernel_size+1):
-        for j in range(center_move, bin_image.shape[1]-kernel_size+1):
-            d_image[i, j] = np.min(bin_image[i-center_move:i+center_move,
-                                             j-center_move:j+center_move])
+    if (image.max() != 255) or (image.min() != 0):
+        raise ValueError("input image's pixel value must be grade")
+
+    d_image = image.copy()
+    center_move = int(ki)
+
+    for i in range(center_move, image.shape[0]-kernel_size+1):
+        for j in range(center_move, image.shape[1]-kernel_size+1):
+            d_image[i, j] = np.min(image[i-center_move:i+center_move, j-center_move:j+center_move])
     return d_image
 
 ################
-e_image = erode_bin_image(img, kernel)
+e_image = erode_image(img1, kernel, i)
+
+
 cv2.imshow("erode", e_image)
 cv2.waitKey(0)
 ##################

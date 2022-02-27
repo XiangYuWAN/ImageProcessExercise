@@ -11,11 +11,15 @@ for i in range(0, irow):
         if img2[i,j] != img1[i,j]:
             compare = 0;
 
-# for i in range(0, irow):
-#     for j in range(0, icol):
-#         if img3[i,j] != img1[i,j]:
-#             compare = 0;
-
-# print(compare)
 file = open("exercise_02b_output_01.txt","a")
 file.write(f'compare result is:{compare}\n')
+#define a method os that can use
+def img_compare(img1, img2):
+    row1 = img1.shape[0]
+    col1 = img1.shape[1]
+    compare = True
+    for i in range(0, row1):
+        for j in range(0, col1):
+            if img2[i, j] != img1[i, j]:
+                compare = False
+    return compare
