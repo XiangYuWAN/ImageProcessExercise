@@ -13,7 +13,7 @@ for i in range(0, irow):
 
 file = open("exercise_02b_output_01.txt","a")
 file.write(f'compare result is:{compare}\n')
-#define a method os that can use
+#define a method of compare
 def img_compare(img1, img2):
     row1 = img1.shape[0]
     col1 = img1.shape[1]
