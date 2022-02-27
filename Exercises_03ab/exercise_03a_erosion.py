@@ -3,7 +3,7 @@ import numpy as np
 
 img1 = cv2.imread("immed_gray_inv.pgm", cv2.IMREAD_GRAYSCALE)
 # ret,img = cv2.threshold(img1, 100, 1, cv2.THRESH_BINARY)
-#s is a function of erode
+#this is a function of erode
 i = 2
 kernel = np.ones(shape=(2*i+1, 2*i+1))
 def erode_image(image, kernel, ki):
