@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
+import img_nomcv_functions.functions as inff
 
 img1 = cv2.imread("immed_gray_inv.pgm", cv2.IMREAD_GRAYSCALE)
 img2 = cv2.imread("immed_gray_inv_20051123_ero2.pgm", cv2.IMREAD_GRAYSCALE)
-# ret,img = cv2.threshold(img1, 100, 1, cv2.THRESH_BINARY)
 #this is a function of erode
 i = 2
 kernel = np.ones(shape=(2*i+1, 2*i+1))
@@ -15,7 +15,7 @@ def erode_image(image, kernel, ki):
     if (image.max() != 255) or (image.min() != 0):
         raise ValueError("input image's pixel value must be grade")
 
-    e_image = image.copy()
+    e_image = np.zeros(shape=(image.shape[0],image.shape[1]))
     center_move = int(ki)
 
     for i in range(center_move, image.shape[0]-kernel_size+1):
@@ -24,12 +24,12 @@ def erode_image(image, kernel, ki):
     return e_image
 
 ################
+erosion2 = cv2.erode(img1,kernel,iterations=1)
 e_image = erode_image(img1, kernel, i)
-
-difference = cv2.subtract(img2, e_image)
-result = not np.any(difference)
+result = inff.img_compare(img2, e_image)
 print(result)
-cv2.imshow("erode", e_image)
+
+cv2.imshow("erode", erosion2)
 cv2.waitKey(0)
 ##################
 '''
