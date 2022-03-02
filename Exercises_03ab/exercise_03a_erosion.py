@@ -3,9 +3,9 @@ import numpy as np
 import img_nomcv_functions.functions as inff
 
 img1 = cv2.imread("immed_gray_inv.pgm", cv2.IMREAD_GRAYSCALE)
-img2 = cv2.imread("immed_gray_inv_20051123_ero1.pgm", cv2.IMREAD_GRAYSCALE)
+img2 = cv2.imread("immed_gray_inv_20051123_ero2.pgm", cv2.IMREAD_GRAYSCALE)
 #this is a function of erode
-i = 1
+i = 2
 kernel = np.ones(shape=(2*i+1, 2*i+1))
 def erode_image(image, kernel, ki):
     kernel_size = kernel.shape[0]
@@ -19,8 +19,9 @@ def erode_image(image, kernel, ki):
 
     for i in range(ki, image.shape[0]-kernel_size+1):
         for j in range(ki, image.shape[1]-kernel_size+1):
+
             e_image[i-ki : i+ki+1, j-ki : j+ki+1] = np.min(image[i-ki : i+ki+1, j-ki : j+ki+1])
-            # ki is the size of kernel(2 * ki + 1)
+            # print(e_image[i-ki : i+ki+1, j-ki : j+ki+1])
     return e_image
 
 ################
