@@ -11,7 +11,7 @@ img = np.array([[0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0]])
 
-LABEL_FZ = np.array([1,2])
+LABEL_FZ = np.array([0,3])
 def produceFlatzone(Img, img, LABEL_FZ):
     x,y = LABEL_FZ[0],LABEL_FZ[1]
     img[x][y] = 1
