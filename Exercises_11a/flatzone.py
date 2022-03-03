@@ -1,36 +1,32 @@
-import cv2
 import numpy as np
 from queue import Queue
 
-q = Queue(maxsize=0)
-iA1 = np.array([[1,1,1,2],
+Img = np.array([[1,1,1,2],
                 [3,3,3,2],
                 [3,4,4,2],
                 [3,4,4,2]])
 
-iA2 = np.array([[0,0,0,0],
+img = np.array([[0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0]])
 
-iw = iA1.shape[0]
-ih = iA1.shape[1]
-# kernel: 4 nabour
-sp = [3,3]
-value = iA1[3][3]
-q.put(sp)
-# print(q.empty())
+LABEL_FZ = np.array([1,2])
+def produceFlatzone(Img, img, LABEL_FZ):
+    x,y = LABEL_FZ[0],LABEL_FZ[1]
+    img[x][y] = 1
+    flatzone = Queue(maxsize=0)
+    flatzone.put([x,y])
+    while not flatzone.empty():
+        p = flatzone.get()
+        px,py = p[0],p[1]
+        for i in range(px-1, px+1+1):
+            for j in range(py-1, py+1+1):
+                if i>=0 and i<4 and j>=0 and j<4:
+                        if Img[i][j]==Img[px][py] and img[i][j] != 1:
+                            img[i][j] = 1
+                            flatzone.put([i,j])
+    return img
+output = produceFlatzone(Img,img,LABEL_FZ)
+print(output)
 
-# ogic is not right
-for i in range(0,iw):
-    for j in range(0,ih):
-        if not q.empty():
-            print(q.qsize())
-            p = q.get()
-            iA2[p[0]][p[1]] = 1
-            for pi in range(i-p[0], i+p[0]+1):
-                for pj in range(j-p[1], j+p[1]+1):
-                    if pi>=0 and pi<iw and pj>=0 and pj<ih:
-                        if iA1[pi][pj] == value:
-                            q.put([pi, pj])
-print(iA2)
