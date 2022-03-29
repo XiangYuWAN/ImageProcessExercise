@@ -1,10 +1,23 @@
+import sys
 import cv2
 from Util import util
 
+ORIGINAL = "micro24.pgm"
+MARKER = "micro24_20060309_markersfond.pgm"
+
+try:
+    ORIGINAL = sys.argv[1]
+    MARKER = sys.argv[2]
+except Exception as e:
+    print(sys.argv)
+    print(e)
+    sys.exit()
+
 # I is an original image
-I = cv2.imread("micro24.pgm", cv2.IMREAD_GRAYSCALE)
+I = cv2.imread(ORIGINAL, cv2.IMREAD_GRAYSCALE)
 #Maker of image
-M = cv2.imread("micro24_20060309_markersfond.pgm", cv2.IMREAD_GRAYSCALE)
+M = cv2.imread(MARKER, cv2.IMREAD_GRAYSCALE)
+
 ret, M = cv2.threshold(M, 100, 255, cv2.THRESH_BINARY)
 Minv = cv2.bitwise_not(M)
 Iinf = util.imageInf(I, Minv)
