@@ -1,0 +1,63 @@
+#After lunch the Var__noise1.py
+
+Prediction:  [1]
+Label:  1
+Prediction:  [8]
+Label:  5
+Prediction:  [1]
+Label:  1
+Prediction:  [7]
+Label:  7
+>>> 22la
+>>> i1 = im1__4__; print(call__make_predictions(i1))
+[4]
+>>> i1 = im3__0__; print(call__make_predictions(i1))
+[0]
+>>> i1 = im5__5__; print(call__make_predictions(i1))
+[9]
+>>> i1 = im5__5__; print(call__make_predictions(i1))
+[9]
+>>>
+
+#We can see that there are some predictions are wrong: the 5 it predict as 9, so we need to restart it again.
+#After we re lunch again:
+Prediction:  [1]
+Label:  1
+Prediction:  [6]
+Label:  5
+Prediction:  [1]
+Label:  1
+Prediction:  [7]
+Label:  7
+>>> i1 = im1__4__; print(call__make_predictions(i1))
+[9]
+>>> i1 = im3__0__; print(call__make_predictions(i1))
+[0]
+>>> i1 = im5__5__; print(call__make_predictions(i1))
+[5]
+>>>
+#we can see still not very good, again:
+Prediction:  [1]
+Label:  1
+Prediction:  [5]
+Label:  5
+Prediction:  [1]
+Label:  1
+Prediction:  [7]
+Label:  7
+>>> i1 = im1__4__; print(call__make_predictions(i1))
+[4]
+>>> i1 = im3__0__; print(call__make_predictions(i1))
+[0]
+>>> i1 = im5__5__; print(call__make_predictions(i1))
+[5]
+>>>
+#Now we have perfect predictions
+
+#Seems:
+>>> image "im1__4__.pgm" (which corresponds to digit 4):
+  File "<stdin>", line 1
+    image "im1__4__.pgm" (which corresponds to digit 4):
+                          ^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>>
